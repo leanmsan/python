@@ -35,7 +35,7 @@ def agregar_canciones():
 def mostrar_resumen():
     nombre_playlist = playlist["nombre"]
     print(f"Playlist: {nombre_playlist}\r\n")
-    print("Canciones:)
+    print("Canciones:")
     for cancion in playlist["Canciones"]:
         print(cancion)
 
