@@ -30,13 +30,13 @@ def app():
             editar_contacto()
             preguntar = False
         elif opcion == 3:
-            print("Lista de contactos")
+            mostrar_contactos()
             preguntar = False
         elif opcion == 4:
-            print("Buscar contacto")
+            buscar_contacto()
             preguntar = False
         elif opcion == 5:
-            print("Borrar contacto")
+            eliminar_contacto()
             preguntar = False
         elif opcion == 6:
             print("Cerrando...")
@@ -66,9 +66,9 @@ def agregar_contacto():
 
         #Escribiendo en el archivo
         with open(CARPETA + nombre_contacto + EXTENSION, "w") as archivo:
-            archivo.write("Nombre:" + nombre_contacto + "\r\n")
-            archivo.write("Telefono:" + telefono_contacto + "\r\n")
-            archivo.write("Categoria:" + categoria_contacto + "\r\n")
+            archivo.write("Nombre: " + nombre_contacto + "\r\n")
+            archivo.write("Telefono: " + telefono_contacto + "\r\n")
+            archivo.write("Categoria: " + categoria_contacto)
         #Mensaje de registro exitoso
         print("\r\n Contacto agregado correctamente \r\n")
         app()
@@ -90,13 +90,57 @@ def editar_contacto():
         categoria_contacto = input("Nueva categoria de contacto: \r\n")
         contacto = Contacto(nombre_contacto, telefono_contacto, categoria_contacto)
         with open(CARPETA + nombre_anterior + EXTENSION, "w") as archivo:
-            archivo.write("Nombre:" + nombre_contacto + "\r\n")
-            archivo.write("Telefono:" + telefono_contacto + "\r\n")
-            archivo.write("Categoria:" + categoria_contacto + "\r\n")
+            archivo.write("Nombre: " + nombre_contacto + "\r\n")
+            archivo.write("Telefono: " + telefono_contacto + "\r\n")
+            archivo.write("Categoria: " + categoria_contacto)
         os.rename(CARPETA + nombre_anterior + EXTENSION, CARPETA + nombre_contacto + EXTENSION)
+        print("\r\n Guardado correctamente \r\n")
+        app()
     else: 
-        print("Ese contacto no existe")
+        print("\r\n Ese contacto no existe")
+        print(" Intente nuevamente \r\n")
+        app()
 #Fin editar_contacto
+
+#Muestra los contactos
+def mostrar_contactos():
+    archivos = os.listdir(CARPETA)
+    #Validando que sean archivos .txt
+    archivos_txt = [i for i in archivos if i.endswith(EXTENSION)]
+    for archivo in archivos_txt:
+        with open(CARPETA + archivo) as contacto:
+            for linea in contacto:
+                print(linea.rstrip())
+#Fin mostrar_contactos
+
+#Busca un contacto
+def buscar_contacto():
+    nombre = input("Ingresa el nombre del contacto: \r\n")
+    try:
+        with open(CARPETA + nombre + EXTENSION) as contacto:
+            print("\r\n Informacion del contacto: \r\n")
+            for linea in contacto:
+                print(linea.rstrip())
+            print("\r\n")
+    except IOError:
+        print("\r\n Ese contacto no existe")
+        print(" Intente nuevamente \r\n")
+    app()
+#Fin buscar_contacto
+
+#Borrar un contacto
+def eliminar_contacto():
+    print("Escribe el nombre del contacto que quieres borrar")
+    nombre_contacto = input("Ingrese el nombre del contacto: \r\n")
+    existe = existe_contacto(nombre_contacto)
+    try:
+        os.remove(CARPETA + nombre_contacto + EXTENSION)
+        print("\r\n Eliminado Correctamente \r\n")
+    except IOError:
+        print("\r\n Ese contacto no existe")
+        print(" Intente nuevamente \r\n")
+    app()
+#Fin eliminar_contacto
 
 #Revisa y crea la carpeta
 def crear_directorio():
