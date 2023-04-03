@@ -1,0 +1,83 @@
+mysql> create database contactos;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use contactos
+Database changed
+mysql> create table contacto(IDContacto int AUTO_INCREMENT PRIMARY KEY, nombre varchar(30) NOT NULL, Email varchar(40));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> describe contacto;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| IDContacto | int         | NO   | PRI | NULL    | auto_increment |
+| nombre     | varchar(30) | NO   |     | NULL    |                |
+| Email      | varchar(40) | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into contacto values("Leandro", "leanmsan@gmail.com");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> drop database contactos
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> create database contactos;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use contactos
+Database changed
+mysql> create table contacto(ContactoID int NOT NULL AUTO_INCREMENT, nombre varchar(40) NOT NULL, ntelefono int, email varchar(40), PRIMARY KEY(ContactoID));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> describe contacto;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| ContactoID | int         | NO   | PRI | NULL    | auto_increment |
+| nombre     | varchar(40) | NO   |     | NULL    |                |
+| ntelefono  | int         | YES  |     | NULL    |                |
+| email      | varchar(40) | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into contacto values( , "Leandro", 12345, "leanmsan@gmail.com");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', "Leandro", 12345, "leanmsan@gmail.com")' at line 1
+mysql> insert into contacto(nombre, ntelefono, email) values("Leandro", 12345, "leanmsan@gmail.com"));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> insert into contacto(nombre, ntelefono, email) values("Leandro", 12345, "leanmsan@gmail.com");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from contacto
+    -> ;
++------------+---------+-----------+--------------------+
+| ContactoID | nombre  | ntelefono | email              |
++------------+---------+-----------+--------------------+
+|          1 | Leandro |     12345 | leanmsan@gmail.com |
++------------+---------+-----------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> delete from contacto where ContactoID = 1;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from contacto
+    -> ;
+Empty set (0.00 sec)
+
+mysql> select * from contacto
+    -> ;
+Empty set (0.00 sec)
+
+mysql> select * from contacto;
+Empty set (0.00 sec)
+
+mysql> select * from contacto;
+Empty set (0.00 sec)
+
+mysql> select * from contacto;
+Empty set (0.00 sec)
+
+mysql> select * from contacto;
+Empty set (0.00 sec)
+
+mysql> Terminal close -- exit!
