@@ -2,7 +2,7 @@ import pymysql
 
 class DataBase:
     def __init__(self):
-        self.connection = pymysql.connect(host = "localhost", user = "root", password = "root", db = "prueba_python")
+        self.connection = pymysql.connect(host = "localhost", user = "root", password = "leanmsanroot", db = "prueba_python")
         self.cursor = self.connection.cursor()
 
     def select_user(self, id):
