@@ -6,7 +6,7 @@ from django.http import HttpRequest, HttpResponse
 # Create your views here.
 @login_required
 def index(request):
-    return render(request, 'index.html', {})
+    return render(request, 'registration/login.html', {})
 
 def logout(request):
     logout(request)
